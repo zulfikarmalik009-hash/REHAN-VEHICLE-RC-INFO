@@ -1,4 +1,12 @@
 from flask import Flask, request, jsonify
+from flask_cors import CORS  # ✅ add this line
+import requests
+from bs4 import BeautifulSoup
+
+app = Flask(__name__)
+CORS(app)  # ✅ enable CORS for all routes
+
+from flask import Flask, request, jsonify
 import requests
 from bs4 import BeautifulSoup
 
@@ -77,7 +85,7 @@ def api():
 
     if not rc_number:
         return jsonify({
-            "credit": "API DEVELOPER: @snxrajput",
+            "credit": "API DEVELOPER: @rehan_z4x",
             "status": "error",
             "message": "Missing required parameter: rc_number"
         }), 400
@@ -86,20 +94,20 @@ def api():
 
     if details.get("error"):
         return jsonify({
-            "credit": "API DEVELOPER: @snxrajput",
+            "credit": "API DEVELOPER: @rehan_z4x",
             "status": "error",
             "message": details["error"]
         }), 500
 
     if not any(details.values()):
         return jsonify({
-            "credit": "API DEVELOPER: @snxrajput",
+            "credit": "API DEVELOPER: @rehan_z4x",
             "status": "not_found",
             "message": f"No details found for {rc_number}"
         }), 404
 
     return jsonify({
-        "credit": "API DEVELOPER : @snxrajput",
+        "credit": "API DEVELOPER : @rehan_z4x",
         "status": "success",
         "rc_number": rc_number.upper(),
         "details": details
