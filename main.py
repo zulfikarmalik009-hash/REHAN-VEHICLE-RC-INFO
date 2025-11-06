@@ -112,3 +112,6 @@ def api():
         "rc_number": rc_number.upper(),
         "details": details
     })
+    @app.route("/api/test")
+def test_cors():
+    return jsonify({"message": "CORS working ✅ API is accessible!"})
