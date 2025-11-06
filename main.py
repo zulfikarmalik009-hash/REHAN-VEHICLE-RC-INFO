@@ -1,16 +1,10 @@
 from flask import Flask, request, jsonify
-from flask_cors import CORS  # ✅ add this line
+from flask_cors import CORS
 import requests
 from bs4 import BeautifulSoup
 
 app = Flask(__name__)
-CORS(app)  # ✅ enable CORS for all routes
-
-from flask import Flask, request, jsonify
-import requests
-from bs4 import BeautifulSoup
-
-app = Flask(__name__)
+CORS(app)
 
 # ------------------- #
 # VEHICLE INFO FETCHER#
@@ -76,8 +70,9 @@ def get_vehicle_details(rc_number: str) -> dict:
     }
     return data
 
+
 # ------------------- #
-# API ROUTE           #
+# ROUTES              #
 # ------------------- #
 @app.route("/", methods=["GET"])
 def api():
@@ -112,6 +107,16 @@ def api():
         "rc_number": rc_number.upper(),
         "details": details
     })
-    @app.route("/api/test")
+
+
+# ✅ TEST ROUTE (for Vercel)
+@app.route("/api/test")
 def test_cors():
     return jsonify({"message": "CORS working ✅ API is accessible!"})
+
+
+# ✅ Vercel requires this
+app = app
+
+if __name__ == "__main__":
+    app.run(host="0.0.0.0", port=5000)
